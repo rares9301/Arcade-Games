@@ -96,6 +96,7 @@ void perform() {
 }
 
 int main() {
+    cout << "[=] Type the sudoku matrix, line by line" << endl;
     // initialize sudoku matrix :3
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
@@ -104,6 +105,7 @@ int main() {
     }
     printSudoku(true);
     cout << "[+] Finished reading sudoku matrix!" << endl;
+    cout << "[=] Press ENTER to start working on it :p" << endl;
     getch();
     perform();
     cout << "\033[2J\033[1;1H"; // cls

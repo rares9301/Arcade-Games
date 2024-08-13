@@ -8,17 +8,23 @@
 + each player has to specify which space on the 3x3 grid they want
 + grid is counted using [0,2]x[0,2], rows followed by collumns
 ### sudoku
-+ logic will be added
-+ possibly auto solver to be implemented
++ the game lets you insert a sudoku matrix.
++ after adding it, you can start solving it by providing row and collumn for the square you want to modify
++ made a mistake? even if the sqare is written you can modify it as normal (solving)
++ you can continue playing until all squares are filled!
+### sudoku solver
++ started a sudoku and you dont know how to finish it? 
++ if so, you can provide it to the solver, row by row and it will solve it using algorithms
++ not perfect, if the sudoku is unsolvable (wrong or too few information) it will solve as much as possible.
 ### chess
 + logic will be added
 
 ## Source Code 
-+ will be available under the src folder
++ is available under the src/ folder
 + can be used/reused to heart content :p 
 
 ## Releases
-+ will be available as executables (linux) compiled.
++ available as executables (linux) compiled.
 
 ## Project Details
 + following project is to be made during the ARCADE X GITHUB event
