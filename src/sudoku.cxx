@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <unistd.h>
 #include <termios.h>
+#include <limits>
 using namespace std;
 
 char sudoku[9][9];
@@ -53,15 +54,45 @@ void printSudoku(bool status) {
     }
 }
 
+bool status() {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (sudoku[i][j]==' ')
+            return true;
+        }
+    }
+    return false;
+}
+
 void perform() {
-    char key;
-    int row, coll;
-    printSudoku(false);
-    cout << "Enter row and collumn for completion";
-    cin >> row >> coll;
-    cout << "Enter value:";
-    cin >> key;
-    cout << "Char entered:" << key << std::flush;
+    while (status()) {
+        char key;
+        int row, coll;
+        cout << "\033[2J\033[1;1H"; // cls
+        printSudoku(false);
+        cout << "Enter row and column for completion: ";
+        cin >> row >> coll;
+        // index reset
+        row--;
+        coll--;
+
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+        // error catch for out of bound
+        if((row >= 0 && row < 9) && (coll >= 0 && coll < 9)) {
+            //
+            cout << "Enter value: ";
+            key = getch();
+
+            if(key >= '1' && key <= '9') {
+                sudoku[row][coll] = key;
+            } else {
+                cout << "Invalid value." << endl;
+            }
+        } else {
+            cout << "Invalid row or column." << endl;
+        }       
+    }
 }
 
 int main() {
@@ -74,9 +105,11 @@ int main() {
     printSudoku(true);
     cout << "[+] Finished reading sudoku matrix!" << endl;
     getch();
-    cout << "\033[2J\033[1;1H"; // cls
     perform();
-    getch();
+    cout << "\033[2J\033[1;1H"; // cls
+    cout << endl;
+    cout << "[=] Sudoku is solved" << endl;
+    printSudoku(false);
     return 0;
 
 }
