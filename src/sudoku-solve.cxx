@@ -93,8 +93,6 @@ void try1(bool &solve1) {
     bool boxes[9];
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            
-            // TODO: try1 logic
             // if current box is already solved, abort
             if (sudoku[i][j] != ' ') {
                 continue;
@@ -121,7 +119,6 @@ void try1(bool &solve1) {
                     }
                 }
             }
-            
             int vars = 0;
             char answer;
             for (int k = 0; k < 9; k++) {
@@ -140,6 +137,79 @@ void try1(bool &solve1) {
             }
         }
     }
+}
+
+void try2(bool &solve2) {
+    solve2 = false;
+    int vars;
+    int answeri, answerj;
+    for (char n = '1'; n <= '9'; n++) {
+        for (int i = 0; i < 9; i++) {
+            // check boxes
+            vars = 0;
+            for (int j = 0; j < 9; j++) {
+                if (checkBox(i, j, n)) {
+                    vars++;
+                    if (vars > 1) {
+                        break;
+                    }
+                    answerj = j;
+                }
+            }
+            // box completion
+            if (vars == 1) {
+                sudoku[i][answerj] = n;
+                solve2 = true;
+            }
+        }
+        for (int j = 0; j < 9; j++) {
+            // boxes that can be n
+            vars = 0;
+            for (int i = 0; i < 9; i++) {
+                if (checkBox(i, j, n)) {
+                    vars++;
+                    if (vars > 1) {
+                        break;
+                    }
+                    answeri = i;
+                }
+            }
+            // success
+            if (vars == 1) {
+                sudoku[answeri][j] = n;
+                solve2 = true;
+            }
+        }
+        for (int i = 0; i <= 6; i += 3) {
+            for (int j = 0; j <= 6; j += 3) {
+                // number of boxes in 3x3 that can be n
+                vars = 0;
+                for (int di = i; di < i + 3; di++) {
+                    for (int dj = j; dj < j + 3; dj++) {
+                        if (checkBox(di, dj, n)) {
+                            vars++;
+                            if (vars > 1) {
+                                break;
+                            }
+                            answeri = di;
+                            answerj = dj;
+                        }
+                    }
+                }
+                // succes of n
+                if (vars == 1) {
+                    sudoku[answeri][answerj] = n;
+                    solve2 = true;
+                }
+            }
+        }
+    }
+}
+
+bool checkBox(int i, int j, char n) {
+    // TODO: logic for checkBox
+    // will search for n on rows and cols then in 3x3 boxes
+    return true;
 }
 
 int main() {
