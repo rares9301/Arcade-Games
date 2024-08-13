@@ -7,3 +7,5 @@
 + games theme will be terminal based (sudoku, chess, tic-tac-toe)
 + difficulty will be easy
 
+### games
++ tic-tac-toe => 2 players, take turns one by one
